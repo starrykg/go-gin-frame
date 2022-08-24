@@ -5,6 +5,7 @@ import (
 	"github.com/Unknwon/goconfig"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/go-redis/redis/v7"
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
 	"strconv"
