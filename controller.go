@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/go-redis/redis/v7"
 	logs "github.com/sirupsen/logrus"
 	"net/http"
 	"strings"
