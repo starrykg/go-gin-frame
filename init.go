@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/Unknwon/goconfig"
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-redis/redis/v7"
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
@@ -94,7 +93,7 @@ func InitRedis() {
 			Dialer:       nil,
 			OnConnect:    nil,
 			Password:     cf["password"],
-			DB:           gconv.String2Int(cf["db"], 0),
+			DB:           String2Int(cf["db"], 0),
 			MaxRetries:   3,
 			DialTimeout:  5 * time.Second,
 			ReadTimeout:  3 * time.Second,
