@@ -2,13 +2,12 @@ package gf
 
 import (
 	"fmt"
-	"gitee.com/kingsingnal/util/gconv"
 	"github.com/Unknwon/goconfig"
 	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis/v7"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -94,13 +93,13 @@ func InitRedis() {
 			Dialer:       nil,
 			OnConnect:    nil,
 			Password:     cf["password"],
-			DB:           gconv.String2Int(cf["db"], 0),
+			DB:           String2Int(cf["db"], 0),
 			MaxRetries:   3,
 			DialTimeout:  5 * time.Second,
 			ReadTimeout:  3 * time.Second,
 			WriteTimeout: 3 * time.Second,
-			PoolSize:     gconv.String2Int(cf["poolSize"], 20),
-			MinIdleConns: gconv.String2Int(cf["minIdleConn"], 5),
+			PoolSize:     String2Int(cf["poolSize"], 20),
+			MinIdleConns: String2Int(cf["minIdleConn"], 5),
 			MaxConnAge:   20,
 			PoolTimeout:  3 * time.Second,
 			IdleTimeout:  5 * time.Second,
@@ -113,4 +112,14 @@ func InitRedis() {
 	if err != nil {
 		log.Error("redis init error: %s", err.Error())
 	}
+}
+
+// 转换默认值
+func String2Int(s string, defaultVal int) int {
+	a, err := strconv.Atoi(s)
+	if err != nil {
+		return defaultVal
+	}
+
+	return a
 }

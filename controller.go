@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gitee.com/kingsingnal/util/gconv"
 	"github.com/gin-gonic/gin"
 	logs "github.com/sirupsen/logrus"
 	"net/http"
@@ -251,4 +250,9 @@ func (controller *Controller) Query(key string) string {
 //router params with gin
 func (controller *Controller) Param(key string) string {
 	return controller.Ctx.Param(key)
+}
+
+//获取参数，不支持keys 0
+func GetRequestKey(r *http.Request, key string) string {
+	return r.URL.Query().Get(key)
 }
