@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	logs "github.com/sirupsen/logrus"
 	"net/http"
 	"strings"
@@ -122,7 +123,7 @@ func RunProcess(controller IController, g *gin.Context) {
 
 func getTrackId(controller IController) IError {
 	//默认采用21位的纳秒时间值(年份仅后两位)
-	trackId := gconv.GetRequestKey(controller.GetContext().Request, "track_id")
+	trackId := GetRequestKey(controller.GetContext().Request, "track_id")
 	if trackId == "" {
 		now := time.Now()
 		trackId = fmt.Sprintf("%s%09d", now.Format("060102150405"), now.UnixNano()%1e9)
